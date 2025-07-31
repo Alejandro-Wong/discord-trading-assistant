@@ -20,6 +20,8 @@ temp/
 active_positions.json
 econ_cal_today.txt
 events.json
+econ_calendar.csv
+latest_headlines.csv
 latest_headlines.txt
 position_headlines.txt
 
