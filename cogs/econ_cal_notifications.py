@@ -14,13 +14,14 @@ class EconCalNotifications(commands.Cog):
     """
 
     def __init__(self, bot):
+        load_dotenv()
         self.bot = bot
+        self.gen_channel = int(os.getenv('general_channel'))
+        
         self.check_upcoming_events.start()
 
         self.df = pd.read_csv('./econ_cal/csvs/econ_calendar.csv', index_col=[0])
-        self.df['Time'] = pd.to_datetime(self.df['Time'])
-
-        load_dotenv()
+        self.df['Time'] = pd.to_datetime(self.df['Time'], format='%H:%M:%S')
 
 
     def get_time_difference(self, time_a: datetime, time_b: datetime) -> str:
@@ -69,9 +70,10 @@ class EconCalNotifications(commands.Cog):
     @tasks.loop(minutes=5)
     async def check_upcoming_events(self) -> None:
         """
-        Sends notification of next economic calendar event 5 minutes before release       
+        Sends notification of next economic calendar event 10 minutes before release       
         """
-        channel = self.bot.get_channel(os.getenv('general_channel'))
+        channel = self.bot.get_channel(self.gen_channel)
+        print(self.gen_channel)
         current_time = datetime.now().replace(microsecond=0)
         
         for i, row in self.df.iterrows():
