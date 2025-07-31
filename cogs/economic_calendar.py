@@ -23,13 +23,14 @@ class EconomicCalendar(commands.Cog):
         Fetches, then creates txt + csv files for today's economic calendar
         """
         econ_cal = econ_calendar()
-        econ_cal['Time'] = pd.to_datetime(econ_cal['Time'])
+        econ_cal['Time'] = pd.to_datetime(econ_cal['Time'], format='%H:%M')
+        econ_cal['Time'] = econ_cal['Time'].apply(lambda x: x.time())
         current_time = datetime.now().replace(microsecond=0)
 
         events = []
         events_json = {}
         for i, row in econ_cal.iterrows():
-            event_time = datetime.combine(datetime.now().date(), row['Time'].time())
+            event_time = datetime.combine(datetime.now().date(), row['Time'])
             events.append(f'🔸 {row['Time']} - {row['Event']} - {''.join(['⭐️' for i in range(row['Stars'])])}\n')
 
             if current_time < event_time:
