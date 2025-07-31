@@ -1,7 +1,8 @@
+import os
 import json
-import asyncio
 import pandas as pd
-from datetime import datetime, time
+from datetime import datetime 
+from dotenv import load_dotenv
 
 import discord
 from discord.ext import tasks, commands
@@ -16,11 +17,13 @@ class Headlines(commands.Cog):
     """
 
     def __init__(self, bot):
+        load_dotenv()
         self.bot = bot
-        self.stocks_news = None
+        self.gen_channel = int(os.getenv('general_channel'))
+        # self.stocks_news = None
         self.most_recent_news.start()
         self.active_position_news.start()
-
+        
 
     async def read_headlines(self, message: discord.Message) -> None:
         """
@@ -40,11 +43,11 @@ class Headlines(commands.Cog):
         """
         Constantly fetches latest 10 headlines, saves to txt file 
         """
-        self.stocks_news = Finviz().stocks_news()[:10]
-        self.stocks_news.to_csv('./finviz/csvs/latest_headlines.csv')
+        stocks_news = Finviz().stocks_news()[:10]
+        stocks_news.to_csv('./news/csvs/latest_headlines.csv')
         
         headlines = []
-        for i, row in self.stocks_news.iterrows():
+        for i, row in stocks_news.iterrows():
             ticker = ', '.join(row['Ticker']) if isinstance(row['Ticker'], list) else row['Ticker']
             headlines.append(f'🔹 {row['Headline']} - **{ticker}** - {row['Time Elapsed']} ago\n')
 
@@ -62,6 +65,7 @@ class Headlines(commands.Cog):
         """
         Checks latest headlines for tickers that are in active positions. Saves relevant headlines to txt              
         """
+        channel = self.bot.get_channel(self.gen_channel)
         latest = pd.read_csv('./finviz/csvs/latest_headlines.csv', index_col=[0])
         latest['Ticker'] = latest['Ticker'].apply(stringlist_to_list)
 
@@ -81,8 +85,10 @@ class Headlines(commands.Cog):
 
         if headlines:
             headlines_str = ''.join(headlines)
-            with open('./cogs/data/position_headlines.txt', 'w') as f:
-                f.write(headlines_str)
+            await channel.send(headlines_str)
+            
+            # with open('./cogs/data/position_headlines.txt', 'w') as f:
+            #     f.write(headlines_str)
 
 
     # Commands
