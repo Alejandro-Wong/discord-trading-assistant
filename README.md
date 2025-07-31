@@ -1,2 +1,7 @@
-# discord-trading-assistant
-Personal discord bot for easy retrieval of relevant market information throughout the trading day
+# Trading Assistant
+Personal discord bot I made to compile market information I frequently reference all in one place.
+
+For now, includes: 
+  - latest headlines
+  - economic calendar event reminders and notifications
+  - index/sector performance comparisons
