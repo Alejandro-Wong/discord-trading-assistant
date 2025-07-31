@@ -45,7 +45,7 @@ class Accounts:
         for position in positions_all_accounts:
             dataframes.append(extract_positions(position))
         
-        positions_df = pd.concat([d for d in dataframes])
+        positions_df = pd.concat([d for d in dataframes if not d.empty])
 
         return positions_df
 
@@ -108,4 +108,3 @@ class Accounts:
         df = df.set_index('date')
 
         return df
-        
