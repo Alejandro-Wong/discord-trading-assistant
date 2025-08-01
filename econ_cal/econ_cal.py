@@ -65,14 +65,18 @@ def econ_calendar(country: str='USD') -> pd.DataFrame:
     date = rows[1]
     rows = rows[2:]
     for row in rows:
-        row.pop(7)
+        if len(row) > 6:
+            row.pop(7)
+        else:
+            continue
 
     df = pd.DataFrame(columns=headers, data=rows)
     df['Imp.'] = pd.Series(stars)
     df = df.rename(columns={'Cur.': 'Country', 'Imp.': 'Stars'})
     df = df[['Time','Country','Stars','Event']]
 
-    df = df[df['Country'].str.strip() == country].reset_index(drop=True) 
+    df = df[df['Country'].str.strip() == country].reset_index(drop=True)
+    df['Stars'] = df['Stars'].apply(lambda x: int(x))
     df.index.name = date[0]
 
     return df
