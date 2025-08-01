@@ -73,7 +73,6 @@ class EconCalNotifications(commands.Cog):
         Sends notification of next economic calendar event 10 minutes before release       
         """
         channel = self.bot.get_channel(self.gen_channel)
-        print(self.gen_channel)
         current_time = datetime.now().replace(microsecond=0)
         
         for i, row in self.df.iterrows():
