@@ -1,0 +1,35 @@
+# virtual environment
+.venv
+
+# DS Store
+.DS_Store
+
+# pycache .pyc
+__pycache__
+
+# scwhwab api tokens
+tokens.json
+
+# scratch files / temp trash 
+temp/
+
+# frequently updated files
+active_positions.json
+econ_cal_today.txt
+events.json
+econ_calendar.csv
+latest_headlines.csv
+latest_headlines.txt
+position_headlines.txt
+
+# test files
+test.py
+
+# discord log
+discord.log
+
+# env
+.env
+
+# tickets
+tickets.txt
