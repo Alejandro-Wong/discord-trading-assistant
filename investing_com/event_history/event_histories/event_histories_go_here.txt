@@ -1,0 +1,29 @@
+Current important economic event histories fetched by update.py
+
+Crude Oil Inventories 
+Core CPI (YoY) 
+CPI (YoY) 
+Core CPI (MoM) 
+PPI (MoM) 
+Core Retail Sales (MoM) 
+Retail Sales (MoM) 
+Initial Jobless Claims 
+Michigan 1-Year Inflation Expectations 
+Michigan Consumer Sentiment 
+Philadelphia Fed Manufacturing Index  
+Existing Home Sales 
+New Home Sales 
+Durable Goods Orders (MoM) 
+S&P Global Manufacturing PMI  
+S&P Global Services PMI  
+CB Consumer Confidence 
+JOLTS Job Openings 
+ADP Nonfarm Employment Change 
+GDP (QoQ) 
+Fed Interest Rate Decision 
+Core PCE Price Index (YoY) 
+Core PCE Price Index (MoM) 
+Average Hourly Earnings (MoM) 
+Nonfarm Payrolls 
+Unemployment Rate 
+Existing Home Sales  
