@@ -22,6 +22,8 @@ latest_headlines.csv
 latest_headlines.txt
 position_headlines.txt
 
+investing_com/event_history/event_histories/*.csv
+
 # test files
 test.py
 
